@@ -1,11 +1,10 @@
-// Navigation/Navigations.js
-
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Search from '../components/Search'
 import FilmDetail from '../components/FilmDetail'
 import Favorites from '../components/Favorites'
+import News from '../components/News'
 
 const SearchStackNavigator = createStackNavigator({
   Search: {
@@ -31,6 +30,18 @@ const FavoritesStackNavigator = createStackNavigator({
   }
 })
 
+const NewsStackNavigator = createStackNavigator({
+  News: {
+    screen: News,
+    navigationOptions: {
+      title: 'Les Derniers Films',
+    },
+  },
+  FilmDetail: {
+    screen: FilmDetail,
+  }
+})
+
 const MoviesTabNavigator = createBottomTabNavigator(
   {
     Search: {
@@ -49,6 +60,16 @@ const MoviesTabNavigator = createBottomTabNavigator(
         tabBarIcon: () => {
           return <Image
             source={require('../Image/ic_favorite.png')}
+            style={styles.icon}/>
+        }
+      }
+    },
+    News: {
+      screen: NewsStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Image/ic_fiber_new.png')}
             style={styles.icon}/>
         }
       }
